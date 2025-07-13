@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Vineetha E-commerce</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logos/vineetha-logo.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/logos/vineetha-logo.svg" alt="Vineetha" style="height: 32px; width: auto;">
+                </a>
+                
+                <div class="nav-search">
+                    <div class="search-container">
+                        <select class="search-category">
+                            <option value="">All Categories</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="home">Home & Kitchen</option>
+                            <option value="beauty">Beauty & Personal Care</option>
+                            <option value="books">Books & Stationery</option>
+                            <option value="toys">Toys & Games</option>
+                            <option value="sports">Sports & Fitness</option>
+                            <option value="automotive">Automotive</option>
+                        </select>
+                        <input type="text" placeholder="Search for products, brands and more..." class="search-input">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="products.html" class="nav-link active">
+                            <i class="fas fa-th-large"></i>
+                            Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cart.html" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            Cart <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="loginNavItem">
+                        <a href="user-login.html" class="nav-link">
+                            <i class="fas fa-user"></i>
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item" id="userNavItem" style="display: none;">
+                        <a href="#" class="nav-link" id="userMenuLink">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">User</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Categories Bar -->
+        <div class="categories-bar">
+            <div class="categories-container">
+                <a href="products.html?category=electronics" class="category-item" data-category="Electronics">
+                    <i class="fas fa-mobile-alt"></i>
+                    Electronics
+                </a>
+                <a href="products.html?category=fashion" class="category-item" data-category="Fashion">
+                    <i class="fas fa-tshirt"></i>
+                    Fashion
+                </a>
+                <a href="products.html?category=home" class="category-item" data-category="Home & Kitchen">
+                    <i class="fas fa-home"></i>
+                    Home & Kitchen
+                </a>
+                <a href="products.html?category=beauty" class="category-item" data-category="Beauty & Personal Care">
+                    <i class="fas fa-spa"></i>
+                    Beauty & Personal Care
+                </a>
+                <a href="products.html?category=books" class="category-item" data-category="Books & Stationery">
+                    <i class="fas fa-book"></i>
+                    Books & Stationery
+                </a>
+                <a href="products.html?category=toys" class="category-item" data-category="Toys & Games">
+                    <i class="fas fa-gamepad"></i>
+                    Toys & Games
+                </a>
+                <a href="products.html?category=sports" class="category-item" data-category="Sports & Fitness">
+                    <i class="fas fa-dumbbell"></i>
+                    Sports & Fitness
+                </a>
+                <a href="products.html?category=automotive" class="category-item" data-category="Automotive">
+                    <i class="fas fa-car"></i>
+                    Automotive
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header" style="margin-bottom: 30px;">
+                <div class="breadcrumb" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; color: var(--text-secondary); font-size: 14px;">
+                    <a href="index.html" style="color: var(--primary-color); text-decoration: none;">Home</a>
+                    <i class="fas fa-chevron-right" style="font-size: 12px;"></i>
+                    <span>Products</span>
+                </div>
+                <h1 class="page-title" style="font-size: 2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 10px;">All Products</h1>
+                <p class="page-subtitle" style="color: var(--text-secondary);">Discover amazing products at great prices</p>
+            </div>
+
+            <!-- Products Layout -->
+            <div class="products-layout">
+                <!-- Filters Sidebar -->
+                <aside class="filters-sidebar">
+                    <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);">Filters</h3>
+                    
+                    <!-- Category Filter -->
+                    <div class="filter-section">
+                        <div class="filter-title">
+                            <i class="fas fa-th-large"></i>
+                            Category
+                        </div>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Electronics">
+                                <span>Electronics</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Fashion">
+                                <span>Fashion</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Home & Kitchen">
+                                <span>Home & Kitchen</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Beauty & Personal Care">
+                                <span>Beauty & Personal Care</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Books & Stationery">
+                                <span>Books & Stationery</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Toys & Games">
+                                <span>Toys & Games</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Sports & Fitness">
+                                <span>Sports & Fitness</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Automotive">
+                                <span>Automotive</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Price Range Filter -->
+                    <div class="filter-section">
+                        <div class="filter-title">
+                            <i class="fas fa-rupee-sign"></i>
+                            Price Range
+                        </div>
+                        <div class="price-range">
+                            <input type="number" class="price-input" placeholder="Min" min="0">
+                            <span style="color: var(--text-secondary);">-</span>
+                            <input type="number" class="price-input" placeholder="Max" min="0">
+                        </div>
+                    </div>
+
+                    <!-- Brand Filter -->
+                    <div class="filter-section">
+                        <div class="filter-title">
+                            <i class="fas fa-tag"></i>
+                            Brand
+                        </div>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Apple">
+                                <span>Apple</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Samsung">
+                                <span>Samsung</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Nike">
+                                <span>Nike</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Adidas">
+                                <span>Adidas</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Sony">
+                                <span>Sony</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Dell">
+                                <span>Dell</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="HP">
+                                <span>HP</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="LG">
+                                <span>LG</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Canon">
+                                <span>Canon</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="JBL">
+                                <span>JBL</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="GoPro">
+                                <span>GoPro</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Microsoft">
+                                <span>Microsoft</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Levi's">
+                                <span>Levi's</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Ray-Ban">
+                                <span>Ray-Ban</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Zara">
+                                <span>Zara</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="H&M">
+                                <span>H&M</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Puma">
+                                <span>Puma</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Tommy Hilfiger">
+                                <span>Tommy Hilfiger</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Gucci">
+                                <span>Gucci</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Rolex">
+                                <span>Rolex</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Converse">
+                                <span>Converse</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Calvin Klein">
+                                <span>Calvin Klein</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Breville">
+                                <span>Breville</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="KitchenAid">
+                                <span>KitchenAid</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Philips">
+                                <span>Philips</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Bosch">
+                                <span>Bosch</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="IKEA">
+                                <span>IKEA</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Dyson">
+                                <span>Dyson</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Cuisinart">
+                                <span>Cuisinart</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Ninja">
+                                <span>Ninja</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="L'Oreal">
+                                <span>L'Oreal</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Maybelline">
+                                <span>Maybelline</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Gillette">
+                                <span>Gillette</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Nivea">
+                                <span>Nivea</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Dove">
+                                <span>Dove</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Lakme">
+                                <span>Lakme</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="MAC">
+                                <span>MAC</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Clinique">
+                                <span>Clinique</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Estee Lauder">
+                                <span>Estee Lauder</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Oral-B">
+                                <span>Oral-B</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Penguin">
+                                <span>Penguin</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Bloomsbury">
+                                <span>Bloomsbury</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Oxford">
+                                <span>Oxford</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Casio">
+                                <span>Casio</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Canson">
+                                <span>Canson</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Parker">
+                                <span>Parker</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Staples">
+                                <span>Staples</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Classmate">
+                                <span>Classmate</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Wildcraft">
+                                <span>Wildcraft</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Camlin">
+                                <span>Camlin</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="LEGO">
+                                <span>LEGO</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Hasbro">
+                                <span>Hasbro</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Hot Wheels">
+                                <span>Hot Wheels</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Mattel">
+                                <span>Mattel</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Ravensburger">
+                                <span>Ravensburger</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Marvel">
+                                <span>Marvel</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Mega Bloks">
+                                <span>Mega Bloks</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Nintendo">
+                                <span>Nintendo</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Rubik's">
+                                <span>Rubik's</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Wilson">
+                                <span>Wilson</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Bell">
+                                <span>Bell</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Life Fitness">
+                                <span>Life Fitness</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Fitbit">
+                                <span>Fitbit</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="TheraBand">
+                                <span>TheraBand</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="TriggerPoint">
+                                <span>TriggerPoint</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="CrossRope">
+                                <span>CrossRope</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Optimum Nutrition">
+                                <span>Optimum Nutrition</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="BMW">
+                                <span>BMW</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Vega">
+                                <span>Vega</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Ambi Pur">
+                                <span>Ambi Pur</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Michelin">
+                                <span>Michelin</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="iOttie">
+                                <span>iOttie</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Meguiar's">
+                                <span>Meguiar's</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Stanley">
+                                <span>Stanley</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="WeatherTech">
+                                <span>WeatherTech</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Black+Decker">
+                                <span>Black+Decker</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Coverking">
+                                <span>Coverking</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="Garmin">
+                                <span>Garmin</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Rating Filter -->
+                    <div class="filter-section">
+                        <div class="filter-title">
+                            <i class="fas fa-star"></i>
+                            Rating
+                        </div>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="4">
+                                <span>4★ & above</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="3">
+                                <span>3★ & above</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="2">
+                                <span>2★ & above</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Availability Filter -->
+                    <div class="filter-section">
+                        <div class="filter-title">
+                            <i class="fas fa-check-circle"></i>
+                            Availability
+                        </div>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="inStock">
+                                <span>In Stock</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" class="filter-checkbox" value="outOfStock">
+                                <span>Out of Stock</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Clear Filters Button -->
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 20px; padding: 10px; border: 1px solid var(--border-color); background: transparent; color: var(--text-primary); border-radius: var(--border-radius); cursor: pointer; transition: var(--transition);" onclick="app.clearFilters()">
+                        <i class="fas fa-times"></i>
+                        Clear All Filters
+                    </button>
+                </aside>
+
+                <!-- Products Content -->
+                <div class="products-content">
+                    <!-- Products Header -->
+                    <div class="products-header">
+                        <div class="products-info">
+                            <span style="color: var(--text-secondary);">Showing <strong id="product-count">0</strong> products</span>
+                        </div>
+                        <div class="sort-options">
+                            <label style="color: var(--text-secondary); font-size: 14px;">Sort by:</label>
+                            <select class="sort-select">
+                                <option value="relevance">Relevance</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Customer Rating</option>
+                                <option value="newest">Newest First</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid">
+                        <!-- Product cards will be dynamically loaded here -->
+                    </div>
+
+                    <!-- Load More Trigger -->
+                    <div class="load-more-trigger" style="height: 20px; margin: 40px 0;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--bg-primary); border-top: 1px solid var(--border-color); padding: 40px 0 20px; margin-top: 60px;">
+        <div class="container">
+            <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px;">
+                <div class="footer-section">
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.2rem;">Vineetha</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Your trusted online shopping destination for quality products and exceptional service.</p>
+                    <div class="social-links" style="display: flex; gap: 15px;">
+                        <a href="#" class="social-link" style="color: var(--text-secondary); font-size: 20px; transition: var(--transition);"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link" style="color: var(--text-secondary); font-size: 20px; transition: var(--transition);"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" style="color: var(--text-secondary); font-size: 20px; transition: var(--transition);"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" style="color: var(--text-secondary); font-size: 20px; transition: var(--transition);"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.2rem;">Quick Links</h3>
+                    <ul class="footer-links" style="list-style: none;">
+                        <li style="margin-bottom: 8px;"><a href="index.html" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Home</a></li>
+                        <li style="margin-bottom: 8px;"><a href="products.html" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Products</a></li>
+                        <li style="margin-bottom: 8px;"><a href="cart.html" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Cart</a></li>
+                                                    <li style="margin-bottom: 8px;"><a href="admin.html" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Admin</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.2rem;">Categories</h3>
+                    <ul class="footer-links" style="list-style: none;">
+                        <li style="margin-bottom: 8px;"><a href="products.html?category=electronics" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Electronics</a></li>
+                        <li style="margin-bottom: 8px;"><a href="products.html?category=fashion" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Fashion</a></li>
+                        <li style="margin-bottom: 8px;"><a href="products.html?category=home" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Home & Kitchen</a></li>
+                        <li style="margin-bottom: 8px;"><a href="products.html?category=beauty" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Beauty & Personal Care</a></li>
+                        <li style="margin-bottom: 8px;"><a href="products.html?category=books" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Books & Stationery</a></li>
+                        <li style="margin-bottom: 8px;"><a href="products.html?category=toys" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Toys & Games</a></li>
+                        <li style="margin-bottom: 8px;"><a href="products.html?category=sports" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Sports & Fitness</a></li>
+                        <li style="margin-bottom: 8px;"><a href="products.html?category=automotive" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Automotive</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.2rem;">Customer Service</h3>
+                    <ul class="footer-links" style="list-style: none;">
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Help Center</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Returns & Refunds</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Shipping Info</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Size Guide</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" style="border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <p style="color: var(--text-secondary);">&copy; 2024 Vineetha E-commerce. All rights reserved.</p>
+                <div class="footer-links" style="display: flex; gap: 20px;">
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Privacy Policy</a>
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Terms of Service</a>
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // User authentication display
+        document.addEventListener('DOMContentLoaded', function() {
+            const userToken = localStorage.getItem('vineethaToken');
+            const userRole = localStorage.getItem('userRole');
+            const userEmail = localStorage.getItem('userEmail');
+            
+            const loginNavItem = document.getElementById('loginNavItem');
+            const userNavItem = document.getElementById('userNavItem');
+            const userName = document.getElementById('userName');
+            const userMenuLink = document.getElementById('userMenuLink');
+            
+            if (userToken) {
+                // User is logged in
+                loginNavItem.style.display = 'none';
+                userNavItem.style.display = 'block';
+                
+                // Display user name or email
+                if (userEmail) {
+                    userName.textContent = userEmail.split('@')[0]; // Show first part of email
+                }
+                
+                // Add logout functionality
+                userMenuLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (confirm('Do you want to logout?')) {
+                        localStorage.removeItem('vineethaToken');
+                        localStorage.removeItem('userRole');
+                        localStorage.removeItem('userEmail');
+                        window.location.reload();
+                    }
+                });
+            } else {
+                // User is not logged in
+                loginNavItem.style.display = 'block';
+                userNavItem.style.display = 'none';
+            }
+        });
+
+        // Add clear filters functionality
+        window.app.clearFilters = function() {
+            // Clear all checkboxes
+            document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Clear price inputs
+            document.querySelectorAll('.price-input').forEach(input => {
+                input.value = '';
+            });
+            
+            // Reset filters
+            this.filters = {
+                category: '',
+                priceRange: { min: 0, max: 100000 },
+                rating: 0,
+                brand: [],
+                availability: 'all'
+            };
+            
+            // Re-render products
+            this.renderProducts();
+            
+            this.showToast('Filters cleared', 'success');
+        };
+    </script>
+</body>
+</html> 

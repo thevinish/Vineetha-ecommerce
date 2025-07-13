@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Vineetha E-commerce</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logos/vineetha-logo.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .cart-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .cart-items {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cart-item-details h4 {
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-size: 16px;
+        }
+        
+        .cart-item-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .quantity-btn:hover {
+            background: var(--bg-light);
+        }
+        
+        .remove-from-cart {
+            background: none;
+            border: none;
+            color: var(--danger-color);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .remove-from-cart:hover {
+            background: rgba(255, 97, 97, 0.1);
+        }
+        
+        .cart-summary {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow-light);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .summary-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .summary-row.total {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+        
+        .checkout-btn:hover {
+            background: var(--primary-hover);
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+        
+        .empty-cart i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: var(--border-color);
+        }
+        
+        .empty-cart h3 {
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .empty-cart p {
+            margin-bottom: 30px;
+        }
+        
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+        
+        @media (max-width: 768px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+                gap: 15px;
+            }
+            
+            .cart-item-image {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .remove-from-cart {
+                grid-column: 1 / -1;
+                justify-self: end;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/logos/vineetha-logo.svg" alt="Vineetha" style="height: 32px; width: auto;">
+                </a>
+                
+                <div class="nav-search">
+                    <div class="search-container">
+                        <select class="search-category">
+                            <option value="">All Categories</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="home">Home & Kitchen</option>
+                            <option value="beauty">Beauty & Personal Care</option>
+                            <option value="books">Books & Stationery</option>
+                            <option value="toys">Toys & Games</option>
+                            <option value="sports">Sports & Fitness</option>
+                            <option value="automotive">Automotive</option>
+                        </select>
+                        <input type="text" placeholder="Search for products, brands and more..." class="search-input">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="products.html" class="nav-link">
+                            <i class="fas fa-th-large"></i>
+                            Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cart.html" class="nav-link active">
+                            <i class="fas fa-shopping-cart"></i>
+                            Cart <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">
+                            <i class="fas fa-user"></i>
+                            Login
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header" style="margin-bottom: 30px;">
+                <div class="breadcrumb" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; color: var(--text-secondary); font-size: 14px;">
+                    <a href="index.html" style="color: var(--primary-color); text-decoration: none;">Home</a>
+                    <i class="fas fa-chevron-right" style="font-size: 12px;"></i>
+                    <span>Shopping Cart</span>
+                </div>
+                <h1 class="page-title" style="font-size: 2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 10px;">Shopping Cart</h1>
+                <p class="page-subtitle" style="color: var(--text-secondary);">Review your items and proceed to checkout</p>
+            </div>
+
+            <!-- Cart Layout -->
+            <div class="cart-container">
+                <!-- Cart Items -->
+                <div class="cart-items">
+                    <div class="cart-items-container">
+                        <!-- Cart items will be dynamically loaded here -->
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <h3 class="summary-title">Order Summary</h3>
+                    
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="subtotal">₹0</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span id="shipping">₹0</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Tax</span>
+                        <span id="tax">₹0</span>
+                    </div>
+                    
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="cart-total">₹0</span>
+                    </div>
+                    
+                                            <button class="checkout-btn" onclick="window.location.href='products.html'">
+                        <i class="fas fa-lock"></i>
+                        Proceed to Checkout
+                    </button>
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: var(--bg-light); border-radius: var(--border-radius);">
+                        <h4 style="margin-bottom: 10px; color: var(--text-primary); font-size: 14px;">
+                            <i class="fas fa-shield-alt" style="color: var(--success-color); margin-right: 5px;"></i>
+                            Secure Checkout
+                        </h4>
+                        <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;">
+                            Your payment information is encrypted and secure. We never store your credit card details.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--bg-primary); border-top: 1px solid var(--border-color); padding: 40px 0 20px; margin-top: 60px;">
+        <div class="container">
+            <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px;">
+                <div class="footer-section">
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.2rem;">Vineetha</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Your trusted online shopping destination for quality products and exceptional service.</p>
+                    <div class="social-links" style="display: flex; gap: 15px;">
+                        <a href="#" class="social-link" style="color: var(--text-secondary); font-size: 20px; transition: var(--transition);"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link" style="color: var(--text-secondary); font-size: 20px; transition: var(--transition);"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" style="color: var(--text-secondary); font-size: 20px; transition: var(--transition);"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" style="color: var(--text-secondary); font-size: 20px; transition: var(--transition);"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.2rem;">Quick Links</h3>
+                    <ul class="footer-links" style="list-style: none;">
+                        <li style="margin-bottom: 8px;"><a href="index.html" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Home</a></li>
+                        <li style="margin-bottom: 8px;"><a href="products.html" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Products</a></li>
+                        <li style="margin-bottom: 8px;"><a href="cart.html" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Cart</a></li>
+                                                    <li style="margin-bottom: 8px;"><a href="admin.html" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Admin</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.2rem;">Customer Service</h3>
+                    <ul class="footer-links" style="list-style: none;">
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Help Center</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Returns & Refunds</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Shipping Info</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Contact Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.2rem;">Payment Methods</h3>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <i class="fab fa-cc-visa" style="font-size: 24px; color: var(--text-secondary);"></i>
+                        <i class="fab fa-cc-mastercard" style="font-size: 24px; color: var(--text-secondary);"></i>
+                        <i class="fab fa-cc-amex" style="font-size: 24px; color: var(--text-secondary);"></i>
+                        <i class="fab fa-cc-paypal" style="font-size: 24px; color: var(--text-secondary);"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" style="border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <p style="color: var(--text-secondary);">&copy; 2024 Vineetha E-commerce. All rights reserved.</p>
+                <div class="footer-links" style="display: flex; gap: 20px;">
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Privacy Policy</a>
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Terms of Service</a>
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none; transition: var(--transition);">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize cart page
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.app) {
+                window.app.renderCart();
+                window.app.updateCartSummary();
+            }
+        });
+
+        // Add cart summary functionality
+        window.app.updateCartSummary = function() {
+            const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 499 ? 0 : 99;
+            const tax = subtotal * 0.18; // 18% GST
+            const total = subtotal + shipping + tax;
+
+            document.getElementById('subtotal').textContent = `₹${subtotal.toLocaleString()}`;
+            document.getElementById('shipping').textContent = shipping === 0 ? 'Free' : `₹${shipping}`;
+            document.getElementById('tax').textContent = `₹${tax.toLocaleString()}`;
+            document.getElementById('cart-total').textContent = `₹${total.toLocaleString()}`;
+        };
+
+        // Override renderCart to include summary update
+        const originalRenderCart = window.app.renderCart;
+        window.app.renderCart = function() {
+            originalRenderCart.call(this);
+            this.updateCartSummary();
+        };
+    </script>
+</body>
+</html> 
